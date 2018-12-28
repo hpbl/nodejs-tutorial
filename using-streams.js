@@ -1,9 +1,17 @@
 const fs = require('fs');
 
-const readStream = fs.createReadStream('./example.txt', 'utf8');
-const writeStream = fs.createWriteStream('./example2.txt')
-/*readStream.on('data', chunk => {
-  writeStream.write(chunk);
+const readStream = (filename, encoding) => {
+  return fs.createReadStream(filename);
+};
+
+const writeStream = (filename) => {
+  return fs.createWriteStream(filename);
+};
+
+const read = readStream('./example.txt', 'utf8');
+const write = writeStream('./example2.txt')
+/*read.on('data', chunk => {
+  write.write(chunk);
 })*/
 
 
@@ -12,6 +20,13 @@ const writeStream = fs.createWriteStream('./example2.txt')
 
 // Compressing file before writing
 const zlib = require('zlib');
-const gzip = zlib.createGzip();
-const writeGzipStream = fs.createWriteStream('./example2.txt.gz')
-readStream.pipe(gzip).pipe(writeGzipStream);
+/* const gzip = zlib.createGzip();
+const writeGzipStream = writeStream('./example2.txt.gz')
+readStream.pipe(gzip).pipe(writeGzipStream); */
+
+
+// Uncompressing file
+const unzip = zlib.createGunzip();
+const readGzipStream = readStream('./example2.txt.gz')
+const unzipWriteStream = writeStream('unzipped.txt')
+readGzipStream.pipe(unzip).pipe(unzipWriteStream);
