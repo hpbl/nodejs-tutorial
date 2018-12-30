@@ -17,3 +17,10 @@ app.get('/example/:name/:age', (req, res) => {
   const { name, age } = req.params;
   res.send(name + " : " + age);
 })
+
+const path = require('path');
+app.use('/public', express.static(path.join(__dirname, 'static')));
+
+app.get('/file', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static', 'index.html'));
+});
