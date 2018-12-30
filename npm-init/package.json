@@ -1,0 +1,19 @@
+{
+  "name": "npm-init-package",
+  "version": "1.0.0",
+  "description": "tutorial implementation",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hpbl/nodejs-tutorial.git"
+  },
+  "author": "Hilton Pintor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hpbl/nodejs-tutorial/issues"
+  },
+  "homepage": "https://github.com/hpbl/nodejs-tutorial#readme"
+}
