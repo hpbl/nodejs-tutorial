@@ -30,6 +30,9 @@ app.get('/file', (req, res) => {
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+const Joi = require('joi');
+
 app.post('/', (req, res) => {
 
   const schema = Joi.object().keys({
@@ -51,4 +54,38 @@ app.post('/', (req, res) => {
   // res.json({ success: true });
 });
 
-const Joi = require('joi');
+
+// Validaidation pt 2 //
+const arrayString = ['banana', 'bacon', 'cheese'];
+const arrayObjects = [{example: 'example1'}, {example: 'example2'}, {example: 'example3'}];
+const userInput = {
+  personalInfo: {
+    streetAddress: '12312312334',
+    city: 'Recife',
+    state: 'PE'
+  },
+  preferences: arrayObjects
+};
+
+const personalInfoSchema = Joi.object().keys({
+  streetAddress: Joi.string().trim().required(),
+  city: Joi.string().trim().required(),
+  state: Joi.string().trim().length(2).required()
+});
+
+const preferencesSchema = Joi.array().items(Joi.object().keys({
+  example: Joi.string().required()
+}));
+
+const userInputschema = Joi.object().keys({
+  personalInfo: personalInfoSchema,
+  preferences: preferencesSchema
+});
+
+Joi.validate(userInput, userInputschema, (error, result) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(result);
+  }
+});
