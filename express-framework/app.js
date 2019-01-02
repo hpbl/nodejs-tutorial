@@ -3,9 +3,9 @@ const app = express();
 
 app.listen(3000);
 
-app.get('/', (req, res) => {
-  res.send('Hello world!');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello world!');
+// });
 
 app.get('/example', (req, res) => {
   res.send('Hello example!');
@@ -89,3 +89,18 @@ Joi.validate(userInput, userInputschema, (error, result) => {
     console.log(result);
   }
 });
+
+
+// EJS //
+app.set('view engine', 'ejs');
+
+app.get('/:userQuery', (req, res) => {
+  res.render('index', {
+    data: {
+      userQuery: req.params.userQuery,
+      searchResults: ['book1', 'book3', 'book2'],
+      loggedIn: true,
+      username: "Pintor"
+    }
+  });
+})

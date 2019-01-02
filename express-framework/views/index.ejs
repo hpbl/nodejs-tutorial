@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>EJS template</title>
+  </head>
+  <body>
+    <h1>You searched for: <%= data.userQuery %> </h1>
+    <%  if (data.loggedIn) { %>
+      <h2>You are loggeed in as: <%= data.username %> </h2>
+    <% } %>
+    <ul>
+      <% data.searchResults.forEach(result => { %>
+        <li> <%= result %> </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
