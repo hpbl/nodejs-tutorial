@@ -90,6 +90,11 @@ Joi.validate(userInput, userInputschema, (error, result) => {
   }
 });
 
+// Middleware //
+app.use('/middleware', (req, res, next) => {
+  req.loggedIn = false
+  next();
+});
 
 // EJS //
 app.set('view engine', 'ejs');
@@ -99,8 +104,8 @@ app.get('/:userQuery', (req, res) => {
     data: {
       userQuery: req.params.userQuery,
       searchResults: ['book1', 'book3', 'book2'],
-      loggedIn: true,
+      loggedIn: req.loggedIn,
       username: "Pintor"
     }
   });
-})
+});
