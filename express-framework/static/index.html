@@ -8,21 +8,39 @@
   <body>
     <h1>Hello Express!</h1>
     <form action="/" method="POST" id="form">
-        <label for="email">Email address:</label>
-        <input type="email" name="email" />
+        <div>
+          <label for="email">Email address:</label>
+          <input type="email" name="email" />
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" name="password" />
+        </div>
+        <button type="submit">Submit</button>
     </form>
     <script type="text/javascript" src="public/js/index.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
+
+
+
       $(document).ready(() => {
         $('#form').submit((e) => {
           e.preventDefault();
+
+          var result = { };
+          $.each($('form').serializeArray(), function() {
+              result[this.name] = this.value;
+          });
+
+          console.log(result);
+
           $.ajax({
             url: '/',
             type: 'post',
             ContentType﻿: 'application/json',
-            data: JSON.stringify($('#form').serializeArray()),
+            data: result,
             success: (response) => {
               console.log('successfully got response');
               console.log(response);

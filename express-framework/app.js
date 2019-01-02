@@ -31,8 +31,24 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.post('/', (req, res) => {
-  console.log(req.body);
+
+  const schema = Joi.object().keys({
+    email: Joi.string().trim().email().required(),
+    password: Joi.string().min(5).max(10).required()
+  });
+
+  Joi.validate(req.body, schema, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send('an error has occured');
+    } else {
+      res.send('successfully posted data')
+    }
+    console.log(result);
+  });
   // database work here
   // res.send('successfully posted data');
-  res.json({ success: true });
+  // res.json({ success: true });
 });
+
+const Joi = require('joi');
