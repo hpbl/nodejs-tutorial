@@ -26,11 +26,13 @@ app.get('/file', (req, res) => {
 });
 
 
-// Post Request //
+// Http Post Request with Express and Body Parser Module //
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.post('/', (req, res) => {
   console.log(req.body);
   // database work here
-  res.send('successfully posted data');
+  // res.send('successfully posted data');
+  res.json({ success: true });
 });
