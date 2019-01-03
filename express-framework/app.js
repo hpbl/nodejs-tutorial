@@ -99,7 +99,7 @@ app.use('/middleware', (req, res, next) => {
 // EJS //
 app.set('view engine', 'ejs');
 
-app.get('/:userQuery', (req, res) => {
+app.get('/query/:userQuery', (req, res) => {
   res.render('index', {
     data: {
       userQuery: req.params.userQuery,
@@ -109,3 +109,8 @@ app.get('/:userQuery', (req, res) => {
     }
   });
 });
+
+
+// Routes //
+const people = require('./routes/people');
+app.use('/people', people);
