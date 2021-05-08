@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/hpbl/nodejs-tutorial#readme",
   "dependencies": {
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.21"
   }
 }
